@@ -2,7 +2,11 @@ const express=require("express");
 const users=require("./MOCK_DATA(1).json");
 const app=express();
 const fs=require("fs");
-const PORT=8000;
+const PORT=process.env.PORT;
+const mongoose=require("mongoose");
+const dotenv=require("dotenv");
+require("dotenv").config();
+const conn=require("./conn");
 //Middleware
 app.use(express.urlencoded({extended:false}));
 app.get("/users",(req,res)=>{
@@ -41,4 +45,6 @@ app.post("/api/users",(req,res)=>{
 return res.json({status:"successfully added",id:users.length});
     })
 });
+
+
 app.listen(PORT,()=>console.log(`Server started at PORT: ${PORT}`));
